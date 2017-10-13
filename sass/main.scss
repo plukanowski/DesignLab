@@ -1,0 +1,306 @@
+@import 'reset';
+@import 'grid';
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+// Variables
+
+$breakpoints: (
+	'small': 767px,
+	'medium': 992px,
+	'large': 1200px,
+);
+
+$mainColor: #3c3c3c;
+
+// Mixins
+
+@mixin respond-to($breakpoint) { 
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+// Overall
+
+body {
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+}
+
+section {
+	padding: 50px 10px;
+	@include respond-to(medium) {
+		padding: 100px 25px;
+	}
+}
+
+[class$="box"] {
+	text-align: center;
+	margin-top: -14px;
+	padding: 30px 20px;
+	border-right: 2px solid #000;
+	border-bottom: 2px solid #000;
+	border-left: 2px solid #000;
+	@include respond-to(medium) {
+		margin-top: -16px;
+		padding: 40px 150px 40px;
+	}
+}
+
+[class$="title--top"] {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1.7rem;
+	display: -webkit-box;  
+    display: -ms-flexbox;  
+    display: -webkit-flex;
+	display: flex;
+	align-items: center;
+	&:before,
+	&:after {
+		content: ' ';
+		display: block;
+		border: 1px solid #000;
+		-webkit-box-flex: 1;             
+		-webkit-flex: 1;    
+		-ms-flex: 1;           
+		flex: 1;  
+	}
+	
+	&:before {
+		margin-right: 15px;
+		@include respond-to(medium) {
+			margin-right: 100px;
+		}
+	}
+	&:after {
+		margin-left: 15px;
+		@include respond-to(medium) {
+			margin-left: 100px;
+		}
+	}
+	@include respond-to(medium) {
+		font-size: 2.1rem;
+		letter-spacing: 5px;
+	}
+}
+
+[class$="paragraph"] {
+	line-height: 24px;
+	font-size: 0.9rem;
+	font-weight: 300;
+	@include respond-to(medium) {
+		font-size: 1rem;
+		padding-top: 25px;
+	}
+}
+
+// Header 
+
+.header {
+	background: url('../images/header_small.jpg');
+	background-size: cover;
+	background-position: 80% 50%;
+	background-attachment: fixed;
+	display: -webkit-box;  
+	display: -ms-flexbox;  
+	display: -webkit-flex; 
+	display: flex;    
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 25px 10px;
+	color: #fff;
+	text-transform: uppercase;
+	@include respond-to(medium) {
+		background: url(../images/header_medium.jpg);
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		height: 100vh;
+		padding: 0;
+	}
+	@include respond-to(large) {
+		background: url(../images/header_large.jpg);
+		background-attachment: fixed;
+	}
+}
+
+.header__container {
+	margin: 0; //for IE;
+}
+
+.header__title {
+	font-size: 2rem;
+	font-weight: bold;
+	letter-spacing: 5px;
+	margin: 20px 0;
+	@include respond-to(medium) {
+		font-size: 3.4rem;
+		margin: 80px 0 45px;
+	}
+}
+
+.header__undertitle {
+	line-height: 29px;
+}
+
+// About 
+
+.about__title,
+.what-we-do__title,
+.contact__title {
+	color: $mainColor;
+	&:before,
+	&:after {
+		border-color: $mainColor;
+	}
+}
+
+.about__box, 
+.what-we-do__box, 
+.contact__box {
+	color: $mainColor;
+	border-color: $mainColor;
+}
+
+// Services 
+
+.services {
+	background: url('../images/services_small.jpg');
+	background-size: cover;
+	color: #fff;
+	@include respond-to(medium) {
+		background: url('../images/services_medium.jpg');
+		background-repeat: no-repeat;
+	}
+	@include respond-to(large) {
+		background: url('../images/services_large.jpg');
+	}
+}
+
+.services__title {
+	&:before,
+	&:after {
+		border-color: #fff;
+	}
+}
+
+.services__box {
+	border-color: #fff;
+}
+
+
+// What we do
+
+.what-we-do__item {
+	padding-top: 25px;
+	@include respond-to(medium) {
+		padding-top: 80px;
+	}
+}
+
+.what-we-do__item-title {
+	margin: 10px 0;
+	text-transform: uppercase;
+	font-weight: bold;
+	@include respond-to(medium) {
+		margin: 25px 0 0;
+		font-size: 1.2rem;
+		letter-spacing: 5px;
+	}
+}
+
+// Works 
+.works {
+	padding: 0;
+}
+
+.works__row {
+	display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+	display: -ms-flexbox;  /* TWEENER - IE 10 */
+	display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+	display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+	flex-direction: column;
+	@include respond-to(medium) {
+		flex-direction: row;
+	}
+}
+
+.works__col {
+	padding-bottom: 10px;
+	position: relative;
+	@include respond-to(medium) {
+		&:nth-child(even) {
+		padding-left: 10px;
+		padding-right: 10px;
+		}
+	}
+}
+
+.works__img {
+	width: 100%;
+	min-height: 100px;
+	display: block;
+}
+
+.works__title {
+	position: absolute;
+	bottom: 25px;
+	left: 25px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: #fff;
+	@include respond-to(medium) {
+		font-size: 1.5rem;
+		bottom: 45px;
+		left: 45px;
+		letter-spacing: 4px;
+	}
+	@include respond-to(large) {
+		font-size: 2.1rem;
+	}
+}
+
+// Contact
+
+.contact--btn {
+	padding: 10px 50px;
+	border: 0;
+	margin: 40px 0 20px;
+	text-transform: uppercase;
+	font-family: 'Lato', sans-serif;
+	background-color: $mainColor;
+	color: #fff;
+	letter-spacing: 2px;
+	cursor: pointer;
+	&:focus {
+		outline: 0;
+	}
+}
+
+// Footer 
+.footer {
+	text-align: center;
+	padding-bottom: 60px;
+}
+
+.footer__logo {
+	vertical-align: middle;
+	padding: 0 25px;
+}
+
+.footer__rights {
+	color: #888888;
+	font-size: .7rem;
+	@include respond-to(medium) {
+		font-size: .9rem;
+	}
+}
